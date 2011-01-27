@@ -1,5 +1,6 @@
 <?php
 require("settings.php");
+require("functions.php");
 session_start();
 $mysql_link=mysql_connect($db["host"],$db["username"],$db["password"]);
 if(!$mysql_link) {
@@ -15,6 +16,7 @@ $query='SELECT * FROM `'.$db["prefix"].'forum`';
 $r=mysql_query($query,$mysql_link);
 $s=mysql_fetch_assoc($r);
 $forum_name=$s["name"];
+$server_id=$s["server_id"];
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,6 +24,8 @@ $forum_name=$s["name"];
 		<title>omg</title>
 		<link rel="Stylesheet" type="text/css" href="style.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="sha1.js"></script>
 	</head>
 	<body>
 <?include("header.php");?>

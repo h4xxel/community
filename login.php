@@ -17,42 +17,6 @@ $s=mysql_fetch_assoc($r);
 $forum_name=$s["name"];
 $server_id=$s["server_id"];
 
-function rand_str($length) {
-	$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
-	$numchars = (strlen($chars) - 1);
-	$string = $chars{rand(0, $numchars)};
-	
-	for ($i = 1; $i < $length; $i+=1){
-		$newchar = $chars{rand(0, $numchars)};
-		$string .=  $newchar;
-	}
-	return $string;
-}
-function display_login($fail=false) {
-	$nonce=rand_str(32);
-	global $server_id;
-	?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Log In</title>
-		<link rel="Stylesheet" type="text/css" href="style.css" />
-		<script type="text/javascript" src="script.js"></script>
-		<script type="text/javascript" src="sha1.js"></script>
-	</head>
-	<body>
-		<h1>Log In</h1>
-		<?if($fail){echo "<h2>u fAil @ lajf.</h2>";}?>
-		<form action="login.php" method="POST" onsubmit="hash_password(this,'<?echo $server_id;?>' ,'<?echo $nonce?>');">
-			<input type="text" name="u" />
-			<input type="password" name="p" />
-			<input type="submit" value="Log In" />
-			<input type="hidden" name="hash" value="" /><input type="hidden" name="nonce" value="<?echo $nonce;?>" />
-		</form>
-	</body>
-</html>
-	<?
-}
 if($_GET["action"]=="logout") {
 	session_destroy();
 	header("Location: .");
@@ -65,9 +29,9 @@ if(isset($_POST["hash"])) {
 		$_SESSION["username"]=$_POST["u"];
 		header("Location: .");
 	}else{
-		display_login(true);
+		header("Location: .?login=fail");
 	}
 }else{
-	display_login();
+	header("Location: .");
 }
 ?>

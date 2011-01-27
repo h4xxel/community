@@ -1,10 +1,71 @@
+* {
+	font-family: 'DejaVu Sans', 'BrandonGrotesqueLightRegular', arial, sans;
+	font-weight: lighter;
+	margin: 0;
+	padding: 0;
+}
 body {
 	width: 960px;
 	margin-left: auto;
 	margin-right: auto;
 	border: 1px dashed black;
 }
-article {
+article, header, footer {
 	display: block;
+}
+article {
 	border: 1px solid red;
+}
+h1 {
+	float: left;
+}
+header {
+	height: 128px;
+	position: relative;
+}
+header form, #userinfo {
+	float: right;
+}
+header form input[type="text"], header form input[type="password"] {
+	width: 128px;
+	border: 1px solid black;
+}
+header form table td {
+	font-size: 8pt;
+}
+header form h6 {
+	font-size: 10pt;
+}
+#menu {
+	clear: both;
+	display: block;
+	position: absolute;
+	bottom: 0;
+	float: left;
+}
+#menu li {
+	display: inline;
+	margin-right: 0.2em;
+	padding: 0;
+	float: left;
+}
+#menu li a {
+	padding: 4px;
+	display: block;
+	text-decoration: none;
+	line-height: 23px;
+	height: 23px;
+	border-radius: 8px 8px 0 0;
+	-moz-border-radius: 8px 8px 0 0;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+#menu li a:hover {
+	background-color: #CDCDCD;
+	border-bottom: white;
+}
+
+.error {
+	color: red;
 }
