@@ -1,7 +1,20 @@
 		<header>
 			<h1><?echo $forum_name;?></h1>
 			<?if(isset($_SESSION["username"])){
-				echo "<div id=\"userinfo\"><p>Inloggad som: ".$_SESSION["username"]." <a href=\"login.php?action=logout\">Logga ut</a></p></div>\n";
+				$query='SELECT * FROM `'.$db["prefix"].'users` WHERE id = "'.$_SESSION["user_id"].'"';
+				$r=mysql_query($query,$mysql_link);
+				$s=mysql_fetch_assoc($r);?>
+				<div id="userinfo">
+					<h6>Inloggad som: <?echo $s["username"];?></h6>
+					<div id="avatar"><?echo '<img class="avatar" src="'.$s["avatar"].'" alt="avatar" />'?></div>
+					<div id="userlinks">
+						<ul>
+							<li><a href="login.php?action=logout">Logga ut</a></li>
+						</ul>
+					</div>
+					<div id="clearer"></div>
+				</div>
+			<?
 			}else{
 			$nonce=rand_str(32);?>
 				<form action="login.php" method="POST" onsubmit="hash_password(this,'<?echo $server_id;?>' ,'<?echo $nonce?>');">
@@ -23,11 +36,8 @@
 			<nav>
 				<ul id="menu">
 					<li><a href=".">Hem</a></li>
-					<li><a href=".">Hem</a></li>
-					<li><a href=".">Hem</a></li>
-					<li><a href=".">Hem</a></li>
-					<li><a href=".">Hem</a></li>
-					<li><a href=".">Hem</a></li>
+					<li><a href="forum.php">Forum</a></li>
+					<li><a href="profile.php">Profil</a></li>
 				</ul>
 			</nav>
 		</header>

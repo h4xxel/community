@@ -9,6 +9,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	border: 1px dashed black;
+	margin-top: 1em;
 }
 article, header, footer {
 	display: block;
@@ -25,6 +26,7 @@ header {
 }
 header form, #userinfo {
 	float: right;
+	border: 1px solid black;
 }
 header form input[type="text"], header form input[type="password"] {
 	width: 128px;
@@ -65,7 +67,43 @@ header form h6 {
 	background-color: #CDCDCD;
 	border-bottom: white;
 }
+#userinfo {
+	width: 150px;
+}
+#userlinks {
+	float: right;
+}
+#avatar {
+	float: left;
+	width: 64px;
+	height: 64px;
+}
 
 .error {
 	color: red;
+}
+.clearer {
+	clear: both;
+}
+.category h3 {
+	margin-left: 2em;
+	float: left;
+}
+.category p {
+	float: right;
+}
+.post_creator {
+	border: 1px solid black;
+	float: left;
+	width: 128px;
+	height: 128px;
+}
+.post {
+	float: left;
+	width: 768px;
+	
+}
+.avatar {
+	width: 64px;
+	height: 64px;
 }

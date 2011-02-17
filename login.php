@@ -22,11 +22,13 @@ if($_GET["action"]=="logout") {
 	header("Location: .");
 }
 if(isset($_POST["hash"])) {
-	$query=sprintf("SELECT `password` FROM `".$db["prefix"]."users` WHERE `username` = '%s'",mysql_real_escape_string($_POST["u"]));
+	$query=sprintf("SELECT `password`, `id` FROM `".$db["prefix"]."users` WHERE `username` = '%s'",mysql_real_escape_string($_POST["u"]));
 	$r=mysql_query($query,$mysql_link);
 	$s=mysql_fetch_assoc($r);
 	if($_POST["hash"]==sha1($s["password"].$_POST["nonce"])&&$s["password"]) {
 		$_SESSION["username"]=$_POST["u"];
+		$_SESSION["user_id"]=$s["id"];
+		
 		header("Location: .");
 	}else{
 		header("Location: .?login=fail");
