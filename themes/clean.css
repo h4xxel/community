@@ -1,0 +1,29 @@
+body {
+	background-color: #fafffb;
+	border: 1px dashed #aad4b1;
+}
+.active {
+	background-color: #aad4b1;
+}
+.wrapper {
+	background-color: #aad4b1;
+}
+.wrapper div {
+	background-color: #e5ffe9;
+}
+.post {
+	border-top: 6px solid #6e9e75;
+}
+.post_creator {
+	border: 3px solid #6e9e75;
+}
+#menu li a:hover {
+	background-color: #6e9e75;
+}
+.wrapper h4 {
+	border-top: 3px solid #fafffb;
+	font-size: 15pt;
+}
+header form, #userinfo {
+	border-left: 1px dashed #aad4b1;
+}

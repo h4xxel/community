@@ -8,17 +8,17 @@ body {
 	width: 960px;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px dashed black;
 	margin-top: 1em;
 }
 article, header, footer {
 	display: block;
 }
 article {
-	border: 1px solid red;
+	/*background-color:#aad4b1;*/
 }
 h1 {
 	float: left;
+	font-size: 50pt;
 }
 header {
 	height: 128px;
@@ -26,7 +26,6 @@ header {
 }
 header form, #userinfo {
 	float: right;
-	border: 1px solid black;
 }
 header form input[type="text"], header form input[type="password"] {
 	width: 128px;
@@ -37,6 +36,9 @@ header form table td {
 }
 header form h6 {
 	font-size: 10pt;
+}
+#userlinks ul {
+	list-style: none;
 }
 #menu {
 	clear: both;
@@ -63,12 +65,12 @@ header form h6 {
 	border-left: 1px solid black;
 	border-right: 1px solid black;
 }
-#menu li a:hover {
-	background-color: #CDCDCD;
-	border-bottom: white;
-}
 #userinfo {
-	width: 150px;
+	width: 190px;
+	height: 128px;
+}
+#userinfo h6 {
+	font-size: 12pt;
 }
 #userlinks {
 	float: right;
@@ -78,7 +80,9 @@ header form h6 {
 	width: 64px;
 	height: 64px;
 }
-
+header form {
+	height: 128px;
+}
 .error {
 	color: red;
 }
@@ -93,7 +97,6 @@ header form h6 {
 	float: right;
 }
 .post_creator {
-	border: 1px solid black;
 	float: left;
 	width: 128px;
 	height: 128px;
@@ -102,7 +105,6 @@ header form h6 {
 .post {
 	float: left;
 	width: 768px;
-	
 }
 .avatar {
 	width: 64px;
@@ -124,4 +126,7 @@ header form h6 {
 }
 .post_new form textarea {
 	height: 256px;
+}
+.wrapper article ul  {
+	list-style: none;
 }

@@ -3,6 +3,7 @@
 	<head>
 		<title><?echo $forum_name;?></title>
 		<link rel="Stylesheet" type="text/css" href="style.css" />
+		<link rel="Stylesheet" type="text/css" href="themes/clean.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 		<script type="text/javascript" src="script.js"></script>
 		<script type="text/javascript" src="sha1.js"></script>
@@ -45,9 +46,10 @@
 			}?>
 			<nav>
 				<ul id="menu">
-					<li><a href=".">Hem</a></li>
-					<li><a href="forum.php">Forum</a></li>
-					<li><a href="profile.php">Profil</a></li>
+					<li><a <?if($tab==0){echo 'class="active"';}?> href=".">Hem</a></li>
+					<li><a <?if($tab==1){echo 'class="active"';}?>href="forum.php">Forum</a></li>
+					<li><a <?if($tab==2){echo 'class="active"';}?>href="profile.php">Profil</a></li>
 				</ul>
 			</nav>
 		</header>
+	<div class="wrapper">
