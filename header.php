@@ -4,7 +4,7 @@
 		<title><?echo $forum_name;?></title>
 		<link rel="Stylesheet" type="text/css" href="style.css" />
 		<link rel="Stylesheet" type="text/css" href="themes/clean.css" />
-		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script type="text/javascript" src="script.js"></script>
 		<script type="text/javascript" src="sha1.js"></script>
 	</head>
