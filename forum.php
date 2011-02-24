@@ -73,7 +73,7 @@ if(isset($_GET["c"])) {
 			</div>
 			<article class="post">
 				<?//Plocka ut url:er och gör de till länkar?>
-				<p><?echo preg_replace("/((http|ftp):\/\/[^ ]*)/i", '<a href="$1">$1</a>', htmlspecialchars($p_s["text"]));?></p>
+				<p><?echo str_replace("\n", "<br />", preg_replace("/((http|ftp):\/\/[^ ]*)/i", '<a href="$1">$1</a>', htmlspecialchars($p_s["text"])));?></p>
 			</article>
 			<div class="clearer"></div>
 		</div>
