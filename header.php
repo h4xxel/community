@@ -28,7 +28,7 @@
 			}else{
 			$nonce=rand_str(32);?>
 				<form action="login.php" method="POST" onsubmit="hash_password(this,'<?echo $server_id;?>' ,'<?echo $nonce?>');">
-					<h6>Logga in<?if($_GET["login"]=="fail"){echo ' <span class="error">Misslyckades</span>';}?></h6>
+					<h6>Logga in<?if($_GET["login"]=="fail"){echo ' <span class="error">Misslyckades</span>';}?><span id="register"><a href="register.php">Registrera</a></span></h6>
 					<table>
 						<tr>
 							<td>Användarnamn: </td><td><input type="text" name="u" /></td>

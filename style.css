@@ -38,6 +38,9 @@ header form table td {
 header form h6 {
 	font-size: 10pt;
 }
+#register {
+	float: right;
+}
 #menu {
 	clear: both;
 	display: block;

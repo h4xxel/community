@@ -45,7 +45,7 @@ if(isset($_GET["c"])) {
 		$t_query=sprintf('SELECT * FROM `'.$db["prefix"]."threads` WHERE category = '%s' ORDER BY `id` DESC",mysql_real_escape_string($_GET["c"]));
 		$t_r=mysql_query($t_query,$mysql_link);
 		echo "<h2>".$s["name"]."</h2>";
-		?><span class="new_thread"><?if(isset($user_id)) echo '<a href="?c='.$_GET["c"].'&amp;action=new">Ny tråd</a>';?></span><?
+		?><span class="new_thread"><?if(isset($_SESSION["user_id"])) {echo '<a href="?c='.$_GET["c"].'&amp;action=new">Ny tråd</a>';}?></span><?
 		while($t_s=mysql_fetch_assoc($t_r)){
 			$u_query='SELECT * FROM `'.$db["prefix"]."users` WHERE id='".$t_s["creator"]."'";
 			$u_r=mysql_query($u_query,$mysql_link);
@@ -70,7 +70,8 @@ if(isset($_GET["c"])) {
 				<img class="avatar" alt="<?echo $u_s["username"];?>" src="<?echo $u_s["avatar"];?>" />
 			</div>
 			<article class="post">
-				<p><?echo htmlspecialchars($p_s["text"]);?></p>
+				<?//Plocka ut url:er och gör de till länkar?>
+				<p><?echo preg_replace("/((http|ftp):\/\/[^ ]*)/i", '<a href="$1">$1</a>', htmlspecialchars($p_s["text"]));?></p>
 			</article>
 			<div class="clearer"></div>
 		</div>
@@ -90,7 +91,7 @@ if(isset($_GET["c"])) {
 	$r=mysql_query($query,$mysql_link);
 	while($s=mysql_fetch_assoc($r)){?>
 		<section class="category">
-			<h2><a href="?c=<?echo $s["id"];?>"><?echo $s["name"];?></a><span class="new_thread"><?if(isset($user_id)) echo '<a href="?c='.$_GET["c"].'&amp;action=new">Ny tråd</a>';?></span></h2>
+			<h2><a href="?c=<?echo $s["id"];?>"><?echo $s["name"];?></a><span class="new_thread"><?if(isset($_SESSION["user_id"])) echo '<a href="?c='.$_GET["c"].'&amp;action=new">Ny tråd</a>';?></span></h2>
 			<?
 			$t_query='SELECT * FROM `'.$db["prefix"]."threads` WHERE category = '".$s["id"]."' ORDER BY `id` DESC LIMIT 0 , 3";
 			$t_r=mysql_query($t_query,$mysql_link);

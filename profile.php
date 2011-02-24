@@ -30,6 +30,12 @@ if(isset($_SESSION["user_id"])) {
 		}else{
 			?><h2 class="error">Du måste fylla i en giltig emailadress!</h2><?
 		}
+	}elseif($_GET["action"]=="avatar") {
+		//$query=sprintf("UPDATE `".$db["prefix"]."users` SET `avatar` = '%s' WHERE `id` = '%s'",mysql_real_escape_string($_POST["signature"]),$_SESSION["user_id"]);
+		//$r=mysql_query($query,$mysql_link);
+		//$s=mysql_fetch_assoc($r);
+		header("Location: profile.php");
+		exit();
 	}
 	if(isset($_GET["id"])){
 		$query=sprintf('SELECT * FROM `'.$db["prefix"].'users` WHERE id = "%s"',mysql_real_escape_string($_GET["id"]));
@@ -62,6 +68,9 @@ if(isset($_SESSION["user_id"])) {
 		<h2><?echo $s["username"];?></h2>
 		<h3><?echo $g_s["name"];?></h3>
 		<img class="avatar" src="<?echo $s["avatar"];?>" />
+		<form method="POST" action="?action=avatar">
+			<p><input type="text" name="avatar" /><input type="submit" value="Byt avatar" /></p>
+		</form>
 		<form method="POST" action="?action=edit">
 			<table class="user_info">
 				<tr><td>Email:</td><td><input name="email" value="<?echo $s["email"];?>" /></td></tr>
