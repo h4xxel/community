@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require("settings.php");
 session_start();
 $mysql_link=mysql_connect($db["host"],$db["username"],$db["password"]);
@@ -36,4 +37,5 @@ if(isset($_POST["hash"])) {
 }else{
 	header("Location: .");
 }
+ob_end_flush();
 ?>

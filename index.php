@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require("settings.php");
 require("functions.php");
 session_start();
@@ -30,4 +31,5 @@ $server_id=$s["server_id"];
 			<li><h3>Ett galleri där man kan ladda upp bilder på sin vattekylda rolex som går i 4,2GHz</h3></li>
 			</ul>
 		</article>
-<?include("footer.php");?>
+<?include("footer.php");
+ob_end_flush();?>

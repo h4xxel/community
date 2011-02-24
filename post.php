@@ -1,4 +1,5 @@
 <?
+ob_start();
 require("settings.php");
 session_start();
 $mysql_link=mysql_connect($db["host"],$db["username"],$db["password"]);
@@ -25,4 +26,5 @@ if(isset($_SESSION["user_id"])&&isset($_POST["text"])&&isset($_GET["t"])){
 }else{
 	header("Location: .");
 }
+ob_end_flush();
 ?>
