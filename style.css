@@ -15,10 +15,11 @@ article, header, footer {
 	display: block;
 }
 article {
-	border: 1px solid red;
+	/*background-color:#aad4b1;*/
 }
 h1 {
 	float: left;
+	font-size: 50pt;
 }
 header {
 	height: 128px;
@@ -26,9 +27,9 @@ header {
 }
 header form, #userinfo {
 	float: right;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 }
-header form input[type="text"], header form input[type="password"] {
+form input[type="text"], form input[type="password"] {
 	width: 128px;
 	border: 1px solid black;
 }
@@ -40,6 +41,9 @@ header form h6 {
 }
 #register {
 	float: right;
+}
+#userlinks ul {
+	list-style: none;
 }
 #menu {
 	clear: both;
@@ -71,7 +75,11 @@ header form h6 {
 	border-bottom: white;
 }
 #userinfo {
-	width: 150px;
+	width: 190px;
+	/*height: 128px;*/
+}
+#userinfo h6 {
+	font-size: 12pt;
 }
 #userlinks {
 	float: right;
@@ -81,7 +89,6 @@ header form h6 {
 	width: 64px;
 	height: 64px;
 }
-
 .error {
 	color: red;
 }
@@ -127,4 +134,7 @@ header form h6 {
 }
 .post_new form textarea {
 	height: 256px;
+}
+.wrapper article ul  {
+	list-style: none;
 }

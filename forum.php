@@ -2,6 +2,7 @@
 require("settings.php");
 require("functions.php");
 session_start();
+$tab=1;
 $mysql_link=mysql_connect($db["host"],$db["username"],$db["password"]);
 if(!$mysql_link) {
 	die("Error: ".mysql_error());
@@ -50,7 +51,7 @@ if(isset($_GET["c"])) {
 			$u_query='SELECT * FROM `'.$db["prefix"]."users` WHERE id='".$t_s["creator"]."'";
 			$u_r=mysql_query($u_query,$mysql_link);
 			$u_s=mysql_fetch_assoc($u_r);?>
-			<h2><a href="?t=<?echo $t_s["id"];?>"><?echo $t_s["name"];?></a></h2><p>av: <?echo '<a href="profile.php?id='.$u_s["id"].'">'.$u_s["username"];?></a></p><div class="clearer"></div>
+			<h4><a href="?t=<?echo $t_s["id"];?>"><?echo $t_s["name"];?></a></h4><p>av: <?echo '<a href="profile.php?id='.$u_s["id"].'">'.$u_s["username"];?></a></p><div class="clearer"></div>
 		<?}
 	}
 } elseif(isset($_GET["t"])) {

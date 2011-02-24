@@ -2,6 +2,7 @@
 require("settings.php");
 require("functions.php");
 session_start();
+$tab=2;
 $mysql_link=mysql_connect($db["host"],$db["username"],$db["password"]);
 if(!$mysql_link) {
 	die("Error: ".mysql_error());
