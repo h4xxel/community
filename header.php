@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><?echo $forum_name;?></title>
+		<link rel="Stylesheet" type="text/css" href="style.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="sha1.js"></script>
+	</head>
+	<body>
 		<header>
 			<h1><?echo $forum_name;?></h1>
 			<?if(isset($_SESSION["username"])){

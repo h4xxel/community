@@ -19,7 +19,7 @@ $forum_name=$s["name"];
 $server_id=$s["server_id"];
 ?>
 <?include("header.php");?>
-		<article>
-			<p>omfg</p>
-		</article>
+		<form method="POST" action="register.php?action=register" />
+		
+		</form>
 <?include("footer.php");?>

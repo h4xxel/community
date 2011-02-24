@@ -97,6 +97,7 @@ header form h6 {
 	float: left;
 	width: 128px;
 	height: 128px;
+	margin-bottom: 1em;
 }
 .post {
 	float: left;
@@ -106,4 +107,21 @@ header form h6 {
 .avatar {
 	width: 64px;
 	height: 64px;
+}
+.new_thread {
+	font-size: 10pt;
+	float: right;
+	margin-right: 1em;
+}
+.post_new form ul, .user_info {
+	list-style: none;
+	margin-left: 2em;
+}
+.post_new form input[type="text"], .post_new form textarea {
+	border: 1px solid black;
+	width: 512px;
+	margin-bottom: 1em;
+}
+.post_new form textarea {
+	height: 256px;
 }

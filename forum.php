@@ -18,27 +18,46 @@ $s=mysql_fetch_assoc($r);
 $forum_name=$s["name"];
 $server_id=$s["server_id"];
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>omg</title>
-		<link rel="Stylesheet" type="text/css" href="style.css" />
-		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-		<script type="text/javascript" src="script.js"></script>
-		<script type="text/javascript" src="sha1.js"></script>
-	</head>
-	<body>
 <?include("header.php");
 if(isset($_GET["c"])) {
-	$t_query=sprintf('SELECT * FROM `'.$db["prefix"]."threads` WHERE category = '%s' ORDER BY `id` DESC",mysql_real_escape_string($_GET["c"]));
-	$t_r=mysql_query($t_query,$mysql_link);
-	while($t_s=mysql_fetch_assoc($t_r)){
-		$u_query='SELECT * FROM `'.$db["prefix"]."users` WHERE id='".$t_s["creator"]."'";
-		$u_r=mysql_query($u_query,$mysql_link);
-		$u_s=mysql_fetch_assoc($u_r);?>
-		<h2><a href="?t=<?echo $t_s["id"];?>"><?echo $t_s["name"];?></a></h2><p>av: <?echo $u_s["username"];?></p><div class="clearer"></div>
-	<?}
+	if($_GET["action"]=="new"&&isset($_SESSION["user_id"])) {
+		$query=sprintf("SELECT * FROM `".$db["prefix"]."categories` WHERE `id` = '%s'",mysql_real_escape_string($_GET["c"]));
+		$r=mysql_query($query,$mysql_link);
+		$s=mysql_fetch_assoc($r);
+		?>
+		<div class="post_new">
+			<h2>Skapar ny tråd i <?echo $s["name"];?></h2>
+			<form action="post.php?c=<?echo $_GET["c"];?>" method="POST">
+				<ul>
+					<li>Titel:</li>
+					<li><input name="title" type="text" /></li>
+					<li>Första posten:</li>
+					<li><textarea name="text"></textarea></li>
+					<li><input type="submit" value="Skapa tråd" /></li>
+				</ul>
+			</form>
+		</div>
+		<?
+	}else{
+		$query=sprintf("SELECT * FROM `".$db["prefix"]."categories` WHERE `id` = '%s'",mysql_real_escape_string($_GET["c"]));
+		$r=mysql_query($query,$mysql_link);
+		$s=mysql_fetch_assoc($r);
+		$t_query=sprintf('SELECT * FROM `'.$db["prefix"]."threads` WHERE category = '%s' ORDER BY `id` DESC",mysql_real_escape_string($_GET["c"]));
+		$t_r=mysql_query($t_query,$mysql_link);
+		echo "<h2>".$s["name"]."</h2>";
+		?><span class="new_thread"><a href="?c=<?echo $_GET["c"];?>&amp;action=new">Ny tråd</a></span><?
+		while($t_s=mysql_fetch_assoc($t_r)){
+			$u_query='SELECT * FROM `'.$db["prefix"]."users` WHERE id='".$t_s["creator"]."'";
+			$u_r=mysql_query($u_query,$mysql_link);
+			$u_s=mysql_fetch_assoc($u_r);?>
+			<h2><a href="?t=<?echo $t_s["id"];?>"><?echo $t_s["name"];?></a></h2><p>av: <?echo '<a href="profile.php?id='.$u_s["id"].'">'.$u_s["username"];?></a></p><div class="clearer"></div>
+		<?}
+	}
 } elseif(isset($_GET["t"])) {
+	$query=sprintf("SELECT * FROM `".$db["prefix"]."threads` WHERE `id` = '%s'",mysql_real_escape_string($_GET["t"]));
+	$r=mysql_query($query,$mysql_link);
+	$s=mysql_fetch_assoc($r);
+	echo "<h2>".$s["name"]."</h2>";
 	$p_query=sprintf('SELECT * FROM `'.$db["prefix"]."posts` WHERE thread = '%s' ORDER BY `id` ASC",mysql_real_escape_string($_GET["t"]));
 	$p_r=mysql_query($p_query,$mysql_link);
 	while($p_s=mysql_fetch_assoc($p_r)){
@@ -47,7 +66,7 @@ if(isset($_GET["c"])) {
 		$u_s=mysql_fetch_assoc($u_r);?>
 		<div>
 			<div class="post_creator">
-				<h2><?echo $u_s["username"];?></h2>
+				<h2><?echo '<a href="profile.php?id='.$u_s["id"].'">'.$u_s["username"];?></a></h2>
 				<img class="avatar" alt="<?echo $u_s["username"];?>" src="<?echo $u_s["avatar"];?>" />
 			</div>
 			<article class="post">
@@ -56,11 +75,13 @@ if(isset($_GET["c"])) {
 			<div class="clearer"></div>
 		</div>
 	<?}
-	if(isset($_SESSION["username"])){?>
+	if(isset($_SESSION["user_id"])){?>
 		<div class="post_new">
 			<form action="post.php?t=<?echo $_GET["t"];?>" method="POST">
-				<textarea name="text"></textarea>
-				<input type="submit" value="Post" />
+				<ul>
+					<li><textarea name="text"></textarea></li>
+					<li><input type="submit" value="Posta svar" /></li>
+				</ul>
 			</form>
 		</div>
 	<?}
@@ -69,7 +90,7 @@ if(isset($_GET["c"])) {
 	$r=mysql_query($query,$mysql_link);
 	while($s=mysql_fetch_assoc($r)){?>
 		<section class="category">
-			<h2><a href="?c=<?echo $s["id"];?>"><?echo $s["name"];?></a></h2>
+			<h2><a href="?c=<?echo $s["id"];?>"><?echo $s["name"];?></a><span class="new_thread"><a href="?c=<?echo $s["id"];?>&amp;action=new">Ny tråd</a></span></h2>
 			<?
 			$t_query='SELECT * FROM `'.$db["prefix"]."threads` WHERE category = '".$s["id"]."' ORDER BY `id` DESC LIMIT 0 , 3";
 			$t_r=mysql_query($t_query,$mysql_link);
@@ -77,11 +98,9 @@ if(isset($_GET["c"])) {
 				$u_query='SELECT * FROM `'.$db["prefix"]."users` WHERE id='".$t_s["creator"]."'";
 				$u_r=mysql_query($u_query,$mysql_link);
 				$u_s=mysql_fetch_assoc($u_r);?>
-				<h3><a href="?t=<?echo $t_s["id"];?>"><?echo $t_s["name"];?></a></h3><p>av: <?echo $u_s["username"];?></p><div class="clearer"></div>
+				<h3><a href="?t=<?echo $t_s["id"];?>"><?echo $t_s["name"];?></a></h3><p>av: <?echo '<a href="profile.php?id='.$u_s["id"].'">'.$u_s["username"];?></a></p><div class="clearer"></div>
 			<?}?>
 		</section>	
 <?	}
 }
 	include("footer.php");?>
-	</body>
-</html>
